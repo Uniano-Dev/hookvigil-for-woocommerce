@@ -22,9 +22,9 @@ It works with the webhooks you already have. Nothing to reconfigure, no third-pa
 
 | Webhook health | Outage and missed orders |
 |---|---|
-| <img src="docs/screenshot-1.png" alt="Webhook health"> | <img src="docs/screenshot-2.png" alt="Outage and missed orders"> |
+| <img src="docs/webhook-health.png" alt="Webhook health"> | <img src="docs/outage-missed-orders.png" alt="Outage and missed orders"> |
 | **Alerts and settings** | **Email alert** |
-| <img src="docs/screenshot-3.png" alt="Alerts and settings"> | <img src="docs/screenshot-4.png" alt="Email alert"> |
+| <img src="docs/alerts-settings.png" alt="Alerts and settings"> | <img src="docs/email-alert.png" alt="Email alert"> |
 
 ## Requirements
 
