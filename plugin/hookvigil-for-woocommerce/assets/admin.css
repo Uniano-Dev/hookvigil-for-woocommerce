@@ -1,0 +1,92 @@
+/* Hookvigil admin screen. Native WordPress components; brand only as accent, icon and spacing. */
+
+.wwfw-header { display: flex; align-items: center; gap: 12px; margin: 10px 0 6px; }
+.wwfw-header h1 { margin: 0; padding: 0; font-size: 23px; font-weight: 600; line-height: 1.3; }
+.wwfw-logo { display: block; width: 40px; height: 40px; flex: none; }
+.wwfw-tabs { margin-bottom: 20px; }
+
+.wwfw-muted { color: #646970; }
+.wwfw-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #8c8f94; flex: none; }
+
+/* Status pills: colour plus word. */
+.wwfw-status { display: inline-flex; align-items: center; gap: 6px; padding: 1px 10px 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; line-height: 22px; white-space: nowrap; background: #f0f0f1; color: #3c434a; }
+.wwfw-status-active { background: #e6f6ef; color: #007a55; }
+.wwfw-status-active .wwfw-dot { background: #02c076; }
+.wwfw-status-disabled { background: #fcf0f1; color: #b32d2e; }
+.wwfw-status-disabled .wwfw-dot { background: #d63638; }
+.wwfw-status-paused { background: #fcf9e8; color: #6e5300; }
+.wwfw-status-paused .wwfw-dot { background: #dba617; }
+
+/* Summary strip. */
+.wwfw-summary { display: flex; align-items: flex-start; gap: 14px; margin: 0 0 20px; padding: 16px 20px; background: #fff; border: 1px solid #dcdcde; border-left-width: 4px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04); }
+.wwfw-summary > .wwfw-dot { width: 12px; height: 12px; margin-top: 5px; }
+.wwfw-summary-title { margin: 0; font-size: 16px; font-weight: 600; color: #1d2327; }
+.wwfw-summary-meta { margin: 4px 0 0; color: #50575e; }
+.wwfw-tone-ok { border-left-color: #02c076; }
+.wwfw-tone-danger { border-left-color: #d63638; }
+.wwfw-tone-warn { border-left-color: #dba617; }
+.wwfw-tone-info { border-left-color: #72aee6; }
+.wwfw-summary.wwfw-tone-ok > .wwfw-dot { background: #02c076; box-shadow: 0 0 0 4px rgba(2, 192, 118, .15); }
+.wwfw-summary.wwfw-tone-danger > .wwfw-dot { background: #d63638; box-shadow: 0 0 0 4px rgba(214, 54, 56, .12); }
+.wwfw-summary.wwfw-tone-warn > .wwfw-dot { background: #dba617; box-shadow: 0 0 0 4px rgba(219, 166, 23, .15); }
+.wwfw-summary.wwfw-tone-info > .wwfw-dot { background: #72aee6; }
+
+/* Webhooks table. */
+.wwfw-webhooks { table-layout: fixed; border-radius: 8px; overflow: hidden; }
+.wwfw-webhooks th, .wwfw-webhooks td { overflow-wrap: break-word; }
+.wwfw-webhooks .column-primary { width: 17%; }
+.wwfw-webhooks .column-status { width: 9%; }
+.wwfw-webhooks .column-host { width: 17%; }
+.wwfw-webhooks .column-success { width: 10%; }
+.wwfw-webhooks .column-streak { width: 7%; }
+.wwfw-webhooks .column-volume { width: 8%; }
+.wwfw-webhooks .column-error { width: 14%; }
+.wwfw-webhooks .column-actions { width: 18%; }
+.wwfw-webhooks th, .wwfw-webhooks td { vertical-align: middle; }
+.wwfw-webhooks td { padding-top: 12px; padding-bottom: 12px; }
+.wwfw-webhooks .row-title { display: block; font-size: 14px; }
+.wwfw-webhooks .wwfw-topic { display: inline-block; margin-top: 6px; }
+.wwfw-webhooks code, .wwfw-route code { white-space: nowrap; font-size: 12px; padding: 2px 6px; border-radius: 4px; background: #f0f0f1; }
+.wwfw-webhooks td.column-streak, .wwfw-webhooks td.column-volume { white-space: nowrap; }
+.wwfw-webhooks .column-actions { text-align: right; }
+.wwfw-webhooks .column-actions .button { max-width: 100%; height: auto; min-height: 32px; white-space: normal; line-height: 1.3; padding-top: 6px; padding-bottom: 6px; }
+.wwfw-webhooks tr.wwfw-row-disabled .column-primary { box-shadow: inset 3px 0 0 #d63638; }
+.wwfw-mobile-status { display: none; }
+.wwfw-footnote { margin-top: 12px; }
+
+/* Webhook details. */
+.wwfw-back { margin: 0 0 10px; }
+.wwfw-title { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.wwfw-title h2 { margin: 0; font-size: 20px; }
+.wwfw-route { color: #50575e; }
+.wwfw-outage { margin: 0 0 16px; padding: 6px 20px 14px; background: #fff; border: 1px solid #dcdcde; border-left-width: 4px; border-radius: 8px; }
+.wwfw-outage.wwfw-tone-danger { border-left-color: #d63638; }
+.wwfw-outage.wwfw-tone-ok { border-left-color: #02c076; }
+.wwfw-outage-period { font-size: 14px; }
+.wwfw-empty { max-width: 760px; margin: 0 0 16px; padding: 8px 20px; background: #fff; border: 1px dashed #c3c4c7; border-radius: 8px; }
+.wwfw-empty.wwfw-tone-ok { border-style: solid; border-left: 4px solid #02c076; }
+
+/* Settings. */
+.wwfw-results { margin: 0; }
+.wwfw-results li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+@media screen and (min-width: 783px) and (max-width: 1180px) {
+	.wwfw-webhooks .column-streak, .wwfw-webhooks .column-volume { display: none; }
+	.wwfw-webhooks .column-primary { width: 24%; }
+	.wwfw-webhooks .column-host { width: 20%; }
+	.wwfw-webhooks .column-error { width: 18%; }
+	.wwfw-webhooks .column-actions { width: 18%; }
+}
+
+@media screen and (max-width: 782px) {
+	.wwfw-header h1 { font-size: 20px; }
+	.wwfw-summary { padding: 14px 16px; }
+	.wwfw-mobile-status { display: block; margin-top: 8px; }
+	.wwfw-webhooks { table-layout: auto; }
+	.wwfw-webhooks td.column-primary { display: block; width: auto; }
+	.wwfw-webhooks td.column-primary::before { display: none; content: none; }
+	.wwfw-webhooks .column-host { white-space: normal; }
+	.wwfw-webhooks tr.is-expanded td.column-status { display: none !important; }
+	.wwfw-webhooks .column-actions { width: auto; text-align: left; }
+	.wwfw-webhooks code, .wwfw-route code { white-space: normal; word-break: normal; overflow-wrap: anywhere; }
+}

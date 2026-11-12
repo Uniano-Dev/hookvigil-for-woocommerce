@@ -1,0 +1,5 @@
+node_modules/
+tests/demo/out/
+*.zip
+.DS_Store
+Thumbs.db

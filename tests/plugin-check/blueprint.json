@@ -1,0 +1,40 @@
+{
+ "preferredVersions": {
+  "php": "8.3",
+  "wp": "latest"
+ },
+ "steps": [
+  {
+   "step": "installPlugin",
+   "pluginData": {
+    "resource": "wordpress.org/plugins",
+    "slug": "woocommerce"
+   },
+   "options": {
+    "activate": true
+   }
+  },
+  {
+   "step": "installPlugin",
+   "pluginData": {
+    "resource": "wordpress.org/plugins",
+    "slug": "plugin-check"
+   },
+   "options": {
+    "activate": true
+   }
+  },
+  {
+   "step": "activatePlugin",
+   "pluginPath": "hookvigil-for-woocommerce/hookvigil-for-woocommerce.php"
+  },
+  {
+   "step": "runPHP",
+   "code": "<?php $it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator('/wordpress/wp-content/plugins/plugin-check/vendor/squizlabs/php_codesniffer/src', FilesystemIterator::SKIP_DOTS)); foreach($it as $f){ if(substr($f,-4)!=='.php') continue; $c=file_get_contents($f); if(strpos($c,'LOCK_EX')!==false){ file_put_contents($f,str_replace('LOCK_EX','0',$c)); } } $cfg='/wordpress/wp-content/plugins/plugin-check/vendor/squizlabs/php_codesniffer/src/Config.php'; file_put_contents($cfg, str_replace(\"if (defined('STDIN') === false\", \"if (true || defined('STDIN') === false\", file_get_contents($cfg)));"
+  },
+  {
+   "step": "wp-cli",
+   "command": "wp cli version"
+  }
+ ]
+}

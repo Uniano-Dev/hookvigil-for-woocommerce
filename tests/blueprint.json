@@ -1,0 +1,14 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "woocommerce" },
+      "options": { "activate": true }
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "hookvigil-for-woocommerce/hookvigil-for-woocommerce.php"
+    }
+  ]
+}

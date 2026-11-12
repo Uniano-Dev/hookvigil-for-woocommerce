@@ -1,0 +1,9 @@
+{
+  "name": "wwfw-dev-tools",
+  "private": true,
+  "description": "Local verification tools for Hookvigil for WooCommerce (not shipped).",
+  "devDependencies": {
+    "@wp-playground/cli": "3.1.59",
+    "@php-wasm/cli": "3.1.59"
+  }
+}
