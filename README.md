@@ -36,7 +36,7 @@ Only delivery metadata is stored (webhook ID, topic, resource ID, status or erro
 
 ## Install
 
-The plugin is in review for the WordPress plugin directory. Until it is listed, copy `plugin/hookvigil-for-woocommerce` to `wp-content/plugins/` and activate it.
+The plugin is in review for the WordPress plugin directory. Until it is listed, download `hookvigil-for-woocommerce.zip` from the [latest release](https://github.com/Uniano-Dev/hookvigil-for-woocommerce/releases/latest), then in WordPress go to **Plugins → Add New → Upload Plugin** and activate it.
 
 ## Development
 
