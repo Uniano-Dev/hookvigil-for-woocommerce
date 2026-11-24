@@ -6,6 +6,8 @@
 
 Get an email, Telegram or Slack alert when WooCommerce disables a webhook, and see which orders never reached your ERP or CRM.
 
+**[Get it from the WordPress plugin directory →](https://wordpress.org/plugins/hookvigil-for-woocommerce/)**
+
 WooCommerce sends orders to other systems — ERPs, CRMs, accounting, fulfilment, Zapier, Make, n8n — through webhooks. When the receiving system fails several times in a row, **WooCommerce silently disables the webhook**: no notice, no retries. Orders keep coming in but stop reaching the other system until someone notices days later. Hookvigil tells you within minutes and shows you what to fix.
 
 ## Features
@@ -36,7 +38,9 @@ Only delivery metadata is stored (webhook ID, topic, resource ID, status or erro
 
 ## Install
 
-The plugin is in review for the WordPress plugin directory. Until it is listed, download `hookvigil-for-woocommerce.zip` from the [latest release](https://github.com/Uniano-Dev/hookvigil-for-woocommerce/releases/latest), then in WordPress go to **Plugins → Add New → Upload Plugin** and activate it.
+In WordPress go to **Plugins → Add New**, search for **Hookvigil**, then install and activate it. WordPress will offer updates automatically. The plugin page is [wordpress.org/plugins/hookvigil-for-woocommerce](https://wordpress.org/plugins/hookvigil-for-woocommerce/).
+
+To install manually, download `hookvigil-for-woocommerce.zip` from the [latest release](https://github.com/Uniano-Dev/hookvigil-for-woocommerce/releases/latest) and upload it in **Plugins → Add New → Upload Plugin**.
 
 ## Development
 
