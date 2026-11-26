@@ -2,7 +2,7 @@
 /**
  * Plugin Name:          Hookvigil for WooCommerce
  * Description:          Alerts you by email, Telegram or Slack when WooCommerce disables a webhook or webhook deliveries get stuck, and shows which orders were missed.
- * Version:              0.3.0
+ * Version:              0.3.1
  * Requires at least:    6.5
  * Requires PHP:         7.4
  * Requires Plugins:     woocommerce
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WWFW_VERSION', '0.3.0' );
+define( 'WWFW_VERSION', '0.3.1' );
 define( 'WWFW_FILE', __FILE__ );
 define( 'WWFW_DIR', plugin_dir_path( __FILE__ ) );
 

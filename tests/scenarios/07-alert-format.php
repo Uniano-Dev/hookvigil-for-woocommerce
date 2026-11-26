@@ -19,6 +19,7 @@ add_filter(
 
 $first      = t_make_order();
 $webhook_id = t_make_webhook( 'ERP order import', 'order.created', 'failing-receiver.example.com' );
+sleep( 1 ); // The incident window includes its opening second, so keep $first out of it.
 t_fail_until_disabled( $webhook_id, $first );
 sleep( 1 );
 t_make_order();
@@ -35,7 +36,8 @@ t_assert( false !== strpos( $mail['message'], '#02C076' ), 'email uses the brand
 t_assert( array( true ) === array_slice( $GLOBALS['wwfw_alt_hook'], -1 ) && ! has_action( 'phpmailer_init', array( 'WWFW_Notifier', 'set_alt_body' ) ), 'plain-text alternative hook is active only during the send' );
 
 $alert = WWFW_Alert::for_incident( WWFW_Incidents::find_open( 'webhook_disabled:' . $webhook_id ), 'reminder' );
-t_assert( false !== strpos( $alert['text'], 'Orders not delivered so far: 2' ), 'alert counts orders missed so far' );
+preg_match( '/Orders not delivered so far: \d+/', $alert['text'], $wwfw_missed );
+t_assert( false !== strpos( $alert['text'], 'Orders not delivered so far: 2' ), 'alert counts orders missed so far (' . ( $wwfw_missed ? $wwfw_missed[0] : 'no count line' ) . ')' );
 t_assert( false !== strpos( $alert['text'], 'Last error: HTTP 500 Internal Server Error' ), 'plain text carries the readable error' );
 
 $telegram = null;

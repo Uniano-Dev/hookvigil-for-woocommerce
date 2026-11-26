@@ -1,5 +1,6 @@
 // Boots WordPress Playground with WooCommerce and the plugin, runs tests/scenarios/run-all.php.
 // Usage: node tests/run-scenarios.mjs [phpVersion]   (default 7.4)
+// WordPress version: WWFW_WP=beta|nightly|7.1.5 (default latest), e.g. WWFW_WP=beta for the current release candidate.
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -12,7 +13,7 @@ const cli = path.join(root, 'tools', 'node_modules', '@wp-playground', 'cli', 'w
 
 // The --php flag is ignored when a blueprint is passed, so the version goes into a temporary blueprint copy.
 const blueprint = JSON.parse(readFileSync(path.join(root, 'tests', 'blueprint.json'), 'utf8'));
-blueprint.preferredVersions = { php, wp: 'latest' };
+blueprint.preferredVersions = { php, wp: process.env.WWFW_WP || 'latest' };
 const blueprintPath = path.join(mkdtempSync(path.join(os.tmpdir(), 'wwfw-')), 'blueprint.json');
 writeFileSync(blueprintPath, JSON.stringify(blueprint));
 

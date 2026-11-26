@@ -67,7 +67,7 @@ class WWFW_Missed_Orders {
 		header( 'Content-Disposition: attachment; filename=' . $filename );
 
 		$out = fopen( 'php://output', 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- streaming download.
-		fputcsv( $out, array( 'order_id', 'order_number', 'status', 'date_created_gmt', 'date_modified_gmt', 'total', 'currency', 'date_created_site', 'date_modified_site' ) );
+		self::csv_row( $out, array( 'order_id', 'order_number', 'status', 'date_created_gmt', 'date_modified_gmt', 'total', 'currency', 'date_created_site', 'date_modified_site' ) );
 		foreach ( self::order_ids( $incident ) as $order_id ) {
 			$order = wc_get_order( $order_id );
 			if ( ! $order ) {
@@ -75,7 +75,7 @@ class WWFW_Missed_Orders {
 			}
 			$created  = $order->get_date_created();
 			$modified = $order->get_date_modified();
-			fputcsv(
+			self::csv_row(
 				$out,
 				array(
 					$order_id,
@@ -91,5 +91,15 @@ class WWFW_Missed_Orders {
 			);
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- streaming download.
+	}
+
+	/**
+	 * Write one RFC 4180 CSV row. Passing every argument keeps PHP 8.4+ free of the fputcsv() escape deprecation.
+	 *
+	 * @param resource $out Output stream.
+	 * @param array    $row Row values.
+	 */
+	private static function csv_row( $out, array $row ) {
+		fputcsv( $out, $row, ',', '"', '' );
 	}
 }

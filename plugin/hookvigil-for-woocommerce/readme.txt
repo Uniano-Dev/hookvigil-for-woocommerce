@@ -2,9 +2,9 @@
 Contributors: uniano
 Tags: woocommerce, webhooks, monitoring, alerts, integrations
 Requires at least: 6.5
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,10 +94,17 @@ Background checks then run when an administrator opens the WordPress admin, and 
 
 == Upgrade Notice ==
 
+= 0.3.1 =
+Tested with WordPress 7.2 and PHP 8.5; the missed-orders CSV no longer triggers a PHP 8.4+ deprecation notice.
+
 = 0.3.0 =
 New name and a quieter admin notice.
 
 == Changelog ==
+
+= 0.3.1 =
+* Tested with WordPress 7.2, WooCommerce 11.3 and PHP 7.4 to 8.5.
+* Fix: downloading the missed-orders CSV no longer raises a PHP 8.4+ deprecation notice for fputcsv(); the file is written as standard RFC 4180 CSV.
 
 = 0.3.0 =
 * Renamed to Hookvigil for WooCommerce.

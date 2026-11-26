@@ -3,7 +3,38 @@
  * Test helpers for Playground scenario runs. Not shipped with the plugin.
  */
 
+// Record every PHP notice, warning and deprecation raised in the plugin's own files, whatever
+// error_reporting says, so a clean run proves the plugin is quiet on this PHP and WordPress.
+$GLOBALS['wwfw_notices'] = array();
+define( 'WWFW_T_PLUGIN_DIR', '/wordpress/wp-content/plugins/hookvigil-for-woocommerce/' );
+$GLOBALS['wwfw_notice_handler'] = static function ( $errno, $errstr, $errfile, $errline ) {
+	// "Cannot modify header information" is expected here only: the CLI runner prints its own output before
+	// the CSV download sends headers. In a real request nothing is printed first.
+	if ( 0 === strpos( (string) $errfile, WWFW_T_PLUGIN_DIR ) && false === strpos( $errstr, 'Cannot modify header information' ) ) {
+		$GLOBALS['wwfw_notices'][] = "PHP {$errno}: {$errstr} at " . basename( $errfile ) . ":{$errline}";
+	}
+	return false;
+};
+set_error_handler( $GLOBALS['wwfw_notice_handler'] );
+
 require_once '/wordpress/wp-load.php';
+
+// WordPress-level deprecations and _doing_it_wrong() calls that come from the plugin's code.
+foreach ( array( 'deprecated_function_run', 'deprecated_constructor_run', 'deprecated_class_run', 'deprecated_file_included', 'deprecated_argument_run', 'deprecated_hook_run', 'doing_it_wrong_run' ) as $wwfw_hook ) {
+	add_action(
+		$wwfw_hook,
+		static function ( $what ) use ( $wwfw_hook ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- test helper.
+			foreach ( debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ) as $frame ) {
+				if ( isset( $frame['file'] ) && 0 === strpos( $frame['file'], WWFW_T_PLUGIN_DIR ) ) {
+					$GLOBALS['wwfw_notices'][] = "{$wwfw_hook}: {$what} from " . basename( $frame['file'] ) . ':' . $frame['line'];
+					return;
+				}
+			}
+		}
+	);
+}
+
 require_once ABSPATH . 'wp-admin/includes/admin.php';
 
 $GLOBALS['wwfw_t'] = array(
@@ -175,6 +206,13 @@ function t_enable_all_channels() {
 }
 
 function t_summary() {
+	$current = set_error_handler( 'is_null' );
+	restore_error_handler();
+	t_assert( $current === $GLOBALS['wwfw_notice_handler'], 'Notice capture stayed active for the whole run' );
+	foreach ( $GLOBALS['wwfw_notices'] as $notice ) {
+		echo "NOTICE: {$notice}\n";
+	}
+	t_assert( array() === $GLOBALS['wwfw_notices'], 'No PHP notices, warnings, deprecations or doing_it_wrong from the plugin (' . count( $GLOBALS['wwfw_notices'] ) . ')' );
 	$t = $GLOBALS['wwfw_t'];
 	echo "\nRESULT: {$t['pass']} passed, {$t['fail']} failed\n";
 }
